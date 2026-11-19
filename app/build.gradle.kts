@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.grman.geofencing"
-        minSdk = 36
+        minSdk = 27
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
@@ -53,5 +53,5 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation("androidx.compose.material:material-icons-extended") // icons
-
+    implementation("androidx.navigation:navigation-compose:2.8.9") // navigation
 }

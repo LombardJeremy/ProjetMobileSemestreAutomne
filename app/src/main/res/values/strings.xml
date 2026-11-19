@@ -10,4 +10,30 @@
     <string name="home_footer">Explorez. Partagez. Gardez vos découvertes.</string>
     <string name="create_account">Créer un compte</string>
     <string name="already_account">J\'ai déjà un compte</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up_top">CRÉER UN COMPTE</string>
+    <string name="sign_up_title">L\'aventure commence\nà côté de chez vous.</string>
+    <string name="sign_up_subtitle">Rejoignez les explorateurs du quotidien.</string>
+    <string name="first_name">Prénom</string>
+    <string name="first_name_placeholder">Votre prénom</string>
+    <string name="password_min">8 caractères minimum</string>
+    <string name="password_hint">Au moins 8 caractères, dont un chiffre.</string>
+    <string name="create_my_account">Créer mon compte</string>
+    <string name="already_account_short">Déjà un compte ?</string>
+
+    <!-- Log In -->
+    <string name="login_top">CONNEXION</string>
+    <string name="login_title">Heureux de\nvous retrouver.</string>
+    <string name="login_subtitle">Vos prochaines découvertes vous attendent.</string>
+    <string name="password_placeholder">Votre mot de passe</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="no_account_yet">Pas encore de compte ?</string>
+    <string name="log_in">Se connecter</string>
+    <string name="sign_up">S\'inscrire</string>
+
+    <!-- Common -->
+    <string name="email">Adresse e-mail</string>
+    <string name="email_placeholder">vous@exemple.fr</string>
+    <string name="password">Mot de passe</string>
 </resources>
