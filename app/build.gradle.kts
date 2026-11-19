@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.grman.geofensingapp"
+    namespace = "com.grman.geofencing"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.grman.geofensingapp"
+        applicationId = "com.grman.geofencing"
         minSdk = 36
         targetSdk = 37
         versionCode = 1
@@ -38,6 +38,7 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
@@ -51,4 +52,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation("androidx.compose.material:material-icons-extended") // icons
+
 }

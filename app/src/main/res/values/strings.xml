@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">GeoFencing</string>
+    <string name="app_name">Périmètre</string>
+
+    <!-- Home -->
+    <string name="home_tag">LES BELLES DÉCOUVERTES SONT TOUT PRÈS</string>
+    <string name="home_title">Sortez des\nsentiers battus.</string>
+    <string name="home_subtitle">Découvrez les lieux autour de vous,\nEntrez dans une zone, laissez-vous surprendre.</string>
+    <string name="home_pill_location">Chicoutimi · 42.41, -71.06</string>
+    <string name="home_pill_alert">Une alerte au bon endroit, au bon moment.</string>
+    <string name="home_footer">Explorez. Partagez. Gardez vos découvertes.</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="already_account">J\'ai déjà un compte</string>
 </resources>

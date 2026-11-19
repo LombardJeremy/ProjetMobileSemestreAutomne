@@ -1,4 +1,4 @@
-package com.grman.geofensingapp
+package com.grman.geofencing
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.grman.geofensingapp.ui.theme.GeoFencingTheme
+import com.grman.geofencing.ui.theme.GeoFencingTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
