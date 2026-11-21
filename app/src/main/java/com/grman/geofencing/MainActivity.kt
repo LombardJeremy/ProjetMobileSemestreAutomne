@@ -6,7 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.grman.geofencing.nav.AppNavigation
+import com.grman.geofencing.nav.AppNavHost
+import com.grman.geofencing.nav.AppRoot
 import com.grman.geofencing.ui.theme.GeoFencingTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GeoFencingTheme {
-                AppNavigation()
+                AppRoot()
             }
         }
     }
@@ -26,6 +27,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainActivityPreview() {
     GeoFencingTheme {
-        AppNavigation()
+        AppRoot()
     }
 }

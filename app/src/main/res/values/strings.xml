@@ -36,4 +36,8 @@
     <string name="email">Adresse e-mail</string>
     <string name="email_placeholder">vous@exemple.fr</string>
     <string name="password">Mot de passe</string>
+
+    <!-- Bottom nav bar -->
+    <string name="nav_map">Carte</string>
+    <string name="nav_profile">Profil</string>
 </resources>
