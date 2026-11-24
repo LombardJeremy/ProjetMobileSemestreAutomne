@@ -1,7 +1,14 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
+
+// Local properties
+val SUPABASE_PUBLISHABLE_KEY: String = gradleLocalProperties(rootDir, providers).getProperty("SUPABASE_PUBLISHABLE_KEY") ?: ""
+val SUPABASE_URL: String = gradleLocalProperties(rootDir, providers).getProperty("SUPABASE_URL") ?: ""
 
 android {
     namespace = "com.grman.geofencing"
@@ -17,6 +24,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Local properties
+        buildConfigField("String", "SUPABASE_URL", "\"$SUPABASE_URL\"")
+        buildConfigField("String", "SUPABASE_PUBLISHABLE_KEY", "\"$SUPABASE_PUBLISHABLE_KEY\"")
     }
 
     buildTypes {
@@ -32,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -52,6 +64,25 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
     implementation("androidx.compose.material:material-icons-extended") // icons
     implementation("androidx.navigation:navigation-compose:2.8.9") // navigation
+
+    // ----- Supabase ----- //
+    // Supabase
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.5.0"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+
+    // Ktor for HTTP requests
+    implementation("io.ktor:ktor-client-android:3.0.3")
+    implementation("io.ktor:ktor-client-content-negotiation:3.0.3")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.3")
+
+    // Kotlinx Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+
+
+
+    // ----- Supabase ----- //
 }
