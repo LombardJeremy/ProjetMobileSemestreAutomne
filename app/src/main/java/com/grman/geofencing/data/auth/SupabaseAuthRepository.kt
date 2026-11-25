@@ -5,10 +5,22 @@ import com.grman.geofencing.data.auth.AuthRepository
 import com.grman.geofencing.supabase
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.auth.status.SessionStatus
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 class SupabaseAuthRepository : AuthRepository {
+
+    override val authState: Flow<AuthState> =
+        supabase.auth.sessionStatus.map { status ->
+            when (status) {
+                is SessionStatus.Initializing -> AuthState.Loading
+                is SessionStatus.Authenticated -> AuthState.Authenticated
+                else -> AuthState.Unauthenticated
+            }
+        }
 
     override suspend fun signIn(email: String, password: String) {
         supabase.auth.signInWith(Email) {
@@ -30,5 +42,9 @@ class SupabaseAuthRepository : AuthRepository {
                 put("firstName", firstName)
             }
         }
+    }
+
+    override suspend fun signOut() {
+        supabase.auth.signOut()
     }
 }

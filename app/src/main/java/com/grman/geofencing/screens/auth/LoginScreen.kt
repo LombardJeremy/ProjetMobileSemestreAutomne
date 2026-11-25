@@ -17,7 +17,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.grman.geofencing.R
+import com.grman.geofencing.data.auth.AuthRepository
+import com.grman.geofencing.data.auth.AuthState
 import com.grman.geofencing.items.auth.AuthFooter
 import com.grman.geofencing.items.auth.AuthLayout
 import com.grman.geofencing.items.auth.ErrorMessage
@@ -27,22 +30,18 @@ import com.grman.geofencing.items.forms.LabeledTextField
 import com.grman.geofencing.ui.theme.TealAccent
 import com.grman.geofencing.items.auth.AuthTitle
 import com.grman.geofencing.ui.theme.GeoFencingTheme
+import com.grman.geofencing.viewmodels.auth.LoginViewModel
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    isLoading: Boolean = false,
-    errorMessage: String? = null,
-    onSubmit: (email: String, password: String) -> Unit = { _, _ -> },
+    onLoginSuccess: () -> Unit = {},
     onBackClick: () -> Unit = {},
     onForgotPasswordClick: () -> Unit = {},
-    onSignUpClick: () -> Unit = {}
+    onSignUpClick: () -> Unit = {},
+    viewModel: LoginViewModel = viewModel()
 ) {
-
-    // todo: viewmodel
-
-    var email by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
 
     // Layout avec btn retour + titre + footer
     AuthLayout(
@@ -74,8 +73,8 @@ fun LoginScreen(
         // E-mail
         LabeledTextField(
             label = stringResource(R.string.email),
-            value = email,
-            onValueChange = { email = it },
+            value = viewModel.email,
+            onValueChange = { viewModel.email = it },
             placeholder = stringResource(R.string.email_placeholder),
             keyboardType = KeyboardType.Email
         )
@@ -85,8 +84,8 @@ fun LoginScreen(
         // Mot de passe
         LabeledTextField(
             label = stringResource(R.string.password),
-            value = password,
-            onValueChange = { password = it },
+            value = viewModel.password,
+            onValueChange = { viewModel.password = it },
             placeholder = stringResource(R.string.password_placeholder),
             isPassword = true
         )
@@ -105,14 +104,14 @@ fun LoginScreen(
         Spacer(Modifier.height(24.dp))
 
         // Error
-        ErrorMessage(errorMessage)
+        ErrorMessage(viewModel.errorMessage)
 
         // Btn Login
         AppButton(
             text = stringResource(R.string.log_in),
-            onClick = { onSubmit(email.trim(), password) },
-            enabled = !isLoading,
-            loading = isLoading
+            onClick = { viewModel.signIn(onSuccess = onLoginSuccess) },
+            enabled = !viewModel.isLoading,
+            loading = viewModel.isLoading
         )
 
         Spacer(Modifier.height(24.dp))
@@ -122,7 +121,14 @@ fun LoginScreen(
 @Preview(showBackground = true, backgroundColor = 0xFF0A171C)
 @Composable
 fun LoginScreenPreview() {
+    val fakeRepo = object : AuthRepository {
+        override val authState = flowOf(AuthState.Unauthenticated)
+        override suspend fun signIn(email: String, password: String) {}
+        override suspend fun signUp(email: String, password: String, firstName: String) {}
+        override suspend fun signOut() {}
+    }
+
     GeoFencingTheme {
-        LoginScreen()
+        LoginScreen(viewModel = LoginViewModel(fakeRepo))
     }
 }

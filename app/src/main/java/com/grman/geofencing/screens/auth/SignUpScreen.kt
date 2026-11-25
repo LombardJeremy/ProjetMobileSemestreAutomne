@@ -13,12 +13,15 @@ import com.grman.geofencing.R
 import com.grman.geofencing.items.auth.AuthFooter
 import com.grman.geofencing.items.auth.AuthLayout
 import com.grman.geofencing.data.auth.AuthRepository
+import com.grman.geofencing.data.auth.AuthState
 import com.grman.geofencing.items.auth.AuthTitle
 import com.grman.geofencing.items.auth.ErrorMessage
 import com.grman.geofencing.items.common.AppButton
 import com.grman.geofencing.items.forms.LabeledTextField
 import com.grman.geofencing.ui.theme.GeoFencingTheme
-import com.grman.geofencing.viewmodels.SignUpViewModel
+import com.grman.geofencing.viewmodels.auth.SignUpViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun SignUpScreen(
@@ -113,8 +116,11 @@ fun SignUpScreen(
 @Composable
 fun SignUpScreenPreview() {
     val fakeRepo = object : AuthRepository {
+        override val authState = flowOf(AuthState.Unauthenticated)
+
         override suspend fun signIn(email: String, password: String) {}
         override suspend fun signUp(email: String, password: String, firstName: String) {}
+        override suspend fun signOut() {}
     }
 
     GeoFencingTheme {

@@ -18,15 +18,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.grman.geofencing.data.auth.AuthRepository
+import com.grman.geofencing.data.auth.AuthState
 import com.grman.geofencing.nav.AppRoot
 import com.grman.geofencing.ui.theme.GeoFencingTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.grman.geofencing.data.zone.Zone
+import com.grman.geofencing.viewmodels.app.AppViewModel
+import com.grman.geofencing.viewmodels.auth.SignUpViewModel
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.from
+import kotlinx.coroutines.flow.flowOf
 
 
 // Supabase
@@ -89,7 +94,15 @@ fun ZonesListTest() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun MainActivityPreview() {
+    val fakeRepo = object : AuthRepository {
+        override val authState = flowOf(AuthState.Unauthenticated)
+
+        override suspend fun signIn(email: String, password: String) {}
+        override suspend fun signUp(email: String, password: String, firstName: String) {}
+        override suspend fun signOut() {}
+    }
+
     GeoFencingTheme {
-        AppRoot()
+        AppRoot(viewModel = AppViewModel(fakeRepo))
     }
 }

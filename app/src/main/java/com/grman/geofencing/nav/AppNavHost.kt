@@ -16,11 +16,12 @@ import com.grman.geofencing.screens.profile.ProfileScreen
 @Composable
 fun AppNavHost(
     navController: NavHostController,
+    startDestination: String,
     modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.WELCOME,
+        startDestination = startDestination,
         modifier = modifier
     ) {
 
@@ -43,7 +44,7 @@ fun AppNavHost(
             LoginScreen(
                 onBackClick = { navController.popBackStack() },
                 onSignUpClick = { navController.navigate(Routes.SIGN_UP) { popUpTo(Routes.WELCOME) } },
-                onSubmit = { email, pwd -> navController.navigateToMainGraph() } // todo: auth et login success -> navigate
+                onLoginSuccess = { navController.navigateToMainGraph() }
             )
         }
 
