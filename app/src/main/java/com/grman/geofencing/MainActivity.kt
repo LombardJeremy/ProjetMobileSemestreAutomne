@@ -1,7 +1,7 @@
 package com.grman.geofencing
 
-import android.net.http.HttpResponseCache.install
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,23 +18,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.grman.geofencing.nav.AppNavHost
 import com.grman.geofencing.nav.AppRoot
 import com.grman.geofencing.ui.theme.GeoFencingTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.grman.geofencing.supabase.Zone
+import com.grman.geofencing.data.zone.Zone
+import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.from
 
 
-// Supabase test
+// Supabase
 val supabase = createSupabaseClient(
     supabaseUrl = BuildConfig.SUPABASE_URL,
     supabaseKey = BuildConfig.SUPABASE_PUBLISHABLE_KEY
 ) {
     install(Postgrest)
+    install(Auth)
 }
 
 class MainActivity : ComponentActivity() {

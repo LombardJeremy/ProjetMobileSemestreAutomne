@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class SignUpViewModel(private val authRepository: AuthRepository = SupabaseAuthRepository()) : ViewModel()
 {
-    var name by mutableStateOf("")
+    var firstName by mutableStateOf("")
     var email by mutableStateOf("")
     var password by mutableStateOf("")
     var confirmPassword by mutableStateOf("")
@@ -23,26 +23,28 @@ class SignUpViewModel(private val authRepository: AuthRepository = SupabaseAuthR
 
         // Validation locale des erreurs dans mdp etc
         when {
-            name.isBlank() -> { errorMessage = "Choisis un nom"; return }
-            name.length < 3 -> { errorMessage = "Le nom doit faire au moins 3 caractères"; return }
+            firstName.isBlank() -> { errorMessage = "Choisis un prénom"; return }
+            firstName.length < 3 -> { errorMessage = "Le prénom doit faire au moins 3 caractères"; return }
             email.isBlank() -> { errorMessage = "Entre ton adresse email"; return }
             password.length < 6 -> { errorMessage = "Le mot de passe doit faire au moins 6 caractères"; return }
             password != confirmPassword -> { errorMessage = "Les mots de passe ne correspondent pas"; return }
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches() -> { errorMessage = "Adresse email invalide"; return }
         }
 
         // Debut du chargement avec spinner dans sign up screen
         isLoading = true
         errorMessage = null
 
-        // Creation du compte dans firebase email / password
+        // Creation du compte dans supabase email / password
         viewModelScope.launch {
             try {
-                authRepository.signUp(email.trim(), password, name.trim())
+                authRepository.signUp(email.trim(), password, firstName.trim())
                 onSuccess()
             } catch (e: Exception) {
                 errorMessage = e.message ?: "Erreur lors de l'inscription"
-            }
+            } finally {
             isLoading = false
+            }
         }
     }
 }

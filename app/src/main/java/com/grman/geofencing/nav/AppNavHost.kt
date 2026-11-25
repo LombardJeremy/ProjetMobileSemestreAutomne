@@ -35,7 +35,7 @@ fun AppNavHost(
             SignUpScreen(
                 onBackClick = { navController.popBackStack() },
                 onLogInClick = { navController.navigate(Routes.LOGIN) { popUpTo(Routes.WELCOME) } },
-                onSubmit = { name, email, pwd -> navController.navigateToMainGraph() } // todo: auth et sign up success -> navigate
+                onSignUpSuccess = { navController.navigateToMainGraph() }
             )
         }
 

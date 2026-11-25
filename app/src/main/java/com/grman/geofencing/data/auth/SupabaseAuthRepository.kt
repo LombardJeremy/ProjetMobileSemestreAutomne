@@ -20,14 +20,14 @@ class SupabaseAuthRepository : AuthRepository {
     override suspend fun signUp(
         email: String,
         password: String,
-        name: String,
+        firstName: String,
     ) {
         supabase.auth.signUpWith(Email) {
             this.email = email
             this.password = password
 
             data = buildJsonObject {
-                put("name", name)
+                put("firstName", firstName)
             }
         }
     }

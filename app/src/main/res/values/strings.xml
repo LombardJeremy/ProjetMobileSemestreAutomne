@@ -19,6 +19,7 @@
     <string name="first_name_placeholder">Votre prénom</string>
     <string name="password_min">8 caractères minimum</string>
     <string name="password_hint">Au moins 8 caractères, dont un chiffre.</string>
+    <string name="confirm_password_hint">Les 2 mots de passe doivent correspondre.</string>
     <string name="create_my_account">Créer mon compte</string>
     <string name="already_account_short">Déjà un compte ?</string>
 
@@ -36,6 +37,7 @@
     <string name="email">Adresse e-mail</string>
     <string name="email_placeholder">vous@exemple.fr</string>
     <string name="password">Mot de passe</string>
+    <string name="confirm_password">Confirmation de mot de passe</string>
 
     <!-- Bottom nav bar -->
     <string name="nav_map">Carte</string>
