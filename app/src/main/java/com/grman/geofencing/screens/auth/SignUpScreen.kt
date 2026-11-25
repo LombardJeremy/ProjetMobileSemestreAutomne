@@ -117,6 +117,7 @@ fun SignUpScreen(
 fun SignUpScreenPreview() {
     val fakeRepo = object : AuthRepository {
         override val authState = flowOf(AuthState.Unauthenticated)
+        override fun currentFirstName() = "Billie"
 
         override suspend fun signIn(email: String, password: String) {}
         override suspend fun signUp(email: String, password: String, firstName: String) {}
