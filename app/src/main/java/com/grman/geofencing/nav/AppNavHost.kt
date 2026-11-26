@@ -12,6 +12,7 @@ import com.grman.geofencing.screens.auth.WelcomeScreen
 import com.grman.geofencing.nav.Routes
 import com.grman.geofencing.screens.map.MapScreen
 import com.grman.geofencing.screens.profile.ProfileScreen
+import com.grman.geofencing.screens.zone.CreateZoneScreen
 
 @Composable
 fun AppNavHost(
@@ -49,11 +50,30 @@ fun AppNavHost(
         }
 
         composable(Routes.MAP) {
-            MapScreen()
+            MapScreen(
+                onCreateZoneClick = { navController.navigate(Routes.CREATE_ZONE) }
+            )
         }
 
         composable(Routes.PROFILE) {
             ProfileScreen()
+        }
+
+        composable(Routes.CREATE_ZONE) {
+            CreateZoneScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onModifyLocationClick = {
+                    navController.popBackStack()
+                },
+                onAddPhotosClick = {
+                    // todo
+                },
+                onPublishSuccess = {
+                    // todo
+                }
+            )
         }
     }
 }

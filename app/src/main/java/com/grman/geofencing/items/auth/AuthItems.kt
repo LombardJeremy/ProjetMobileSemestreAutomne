@@ -20,6 +20,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.grman.geofencing.items.common.BackButton
 import com.grman.geofencing.ui.theme.AppBackground
 import com.grman.geofencing.ui.theme.GraySubtitle
 import com.grman.geofencing.ui.theme.LittleRoundedCornerShape
@@ -55,12 +56,7 @@ fun AuthLayout(
             ) {
 
                 // Bouton retour
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Retour",
-                    tint = Color.White,
-                    modifier = Modifier.size(20.dp).clickable { onBackClick() }
-                )
+                BackButton(onBackClick = onBackClick);
 
                 // Titre
                 if (topTitle != null) {

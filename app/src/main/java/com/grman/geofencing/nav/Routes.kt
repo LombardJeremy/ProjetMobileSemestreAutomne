@@ -13,6 +13,7 @@ object Routes {
 
     const val MAP = "map"
     const val PROFILE = "profile"
+    const val CREATE_ZONE = "create_zone"
 }
 
 val bottomNavItems = listOf(

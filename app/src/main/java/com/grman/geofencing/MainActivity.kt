@@ -25,6 +25,7 @@ import com.grman.geofencing.ui.theme.GeoFencingTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.grman.geofencing.data.zone.Zone
+import com.grman.geofencing.screens.zone.CreateZoneScreen
 import com.grman.geofencing.viewmodels.app.AppViewModel
 import com.grman.geofencing.viewmodels.auth.SignUpViewModel
 import io.github.jan.supabase.auth.Auth
