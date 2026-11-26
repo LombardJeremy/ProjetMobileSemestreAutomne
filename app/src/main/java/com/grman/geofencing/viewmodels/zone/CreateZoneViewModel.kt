@@ -26,8 +26,10 @@ class CreateZoneViewModel : ViewModel() {
         "Un point de rencontre sur le campus de l'UQAC. " +
                 "Une nouvelle zone à découvrir à Chicoutimi.")
 
+    var descriptionMaxLength by mutableIntStateOf(500)
+
     // Photos
-    var photoCount by mutableStateOf(0)
+    var photoCount by mutableIntStateOf(0)
 
 
     // Autres
@@ -36,7 +38,7 @@ class CreateZoneViewModel : ViewModel() {
     var errorMessage by mutableStateOf<String?>(null)
 
     // Type
-    fun updateType(type: String) { // todo: enum ?
+    fun updateType(type: String) {
         selectedType = type
     }
 

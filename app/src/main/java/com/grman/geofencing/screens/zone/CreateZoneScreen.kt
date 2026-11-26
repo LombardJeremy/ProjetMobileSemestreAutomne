@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.grman.geofencing.data.auth.AuthRepository
 import com.grman.geofencing.data.auth.AuthState
-import com.grman.geofencing.items.zone.CreateZoneHeader
-import com.grman.geofencing.items.zone.ZoneLocationCard
+import com.grman.geofencing.items.common.AppButton
+import com.grman.geofencing.items.zone.*
 import com.grman.geofencing.screens.profile.ProfileScreen
 import com.grman.geofencing.ui.theme.GeoFencingTheme
 import com.grman.geofencing.viewmodels.profile.ProfileViewModel
@@ -66,7 +66,76 @@ fun CreateZoneScreen(
                 radius = viewModel.radius,
                 onModifyClick = onModifyLocationClick
             )
+
+            Spacer(Modifier.height(24.dp))
+
+            // Titre de lieu
+            ZoneSectionLabel("Type de lieu") // todo: strings.xml
+
+            Spacer(Modifier.height(6.dp))
+
+            // Selection des types
+            ZoneTypeSelector(
+                selectedType = viewModel.selectedType,
+                onTypeSelected = viewModel::updateType
+            )
+
+            Spacer(Modifier.height(20.dp))
+
+            // Nom
+            ZoneFormField(
+                label = "Nom de la zone",
+                value = viewModel.zoneName,
+                onValueChange = viewModel::updateName,
+                placeholder = "Ex : Campus de l'UQAC", // todo: strings.xml
+                singleLine = true
+            )
+
+            Spacer(Modifier.height(20.dp))
+
+            // Description
+            ZoneFormField(
+                label = "Description",
+                value = viewModel.description,
+                onValueChange = viewModel::updateDescription,
+                placeholder = "Décris cet endroit...", // todo: strings.xml
+                singleLine = false,
+                maxLength = viewModel.descriptionMaxLength
+            )
+
+            Spacer(Modifier.height(24.dp))
+
+            // Photos
+            ZonePhotosCard(
+                photoCount = viewModel.photoCount,
+                onAddClick = onAddPhotosClick
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            // Erreur
+            viewModel.errorMessage?.let { error ->
+                ZoneErrorMessage(error)
+            }
+
+            Spacer(Modifier.height(24.dp))
         }
+
+        // Publish btn
+        AppButton(
+            text = "Publier la zone",
+            onClick = {
+                viewModel.publish(
+                    onSuccess = onPublishSuccess
+                )
+            },
+            enabled = !viewModel.isLoading &&
+                    viewModel.zoneName.isNotBlank() &&
+                    viewModel.description.isNotBlank(),
+            loading = viewModel.isLoading
+        )
+
+        Spacer(Modifier.height(24.dp))
     }
 }
 
